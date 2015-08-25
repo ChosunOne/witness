@@ -2,14 +2,11 @@
 
 ### Economics of Cross-Witness
 
-If any participant cheats, his money at stake must be enough to cover for all the expenses. The contract denomination must be grater than aggregated transaction costs of all the participants, plus potential arbitration costs. The aggregated costs are proportionate to the number of participants, and therefore there must be a limit to the number of participants for each denomination of smart contract. If the number of people exceeds the contract limit, it might result in shortages/queues. This gives the malicious entities an opportunity to launch DDoS attack. One of the possible solutions: multiple contracts + one "router" contract, through which all the TX must be initiated.
+If any participant cheats, his money at stake must be enough to cover for all the expenses. The contract denomination must be greater than aggregated transaction costs of all the participants, plus potential arbitration costs. The aggregated costs are proportionate to the number of participants, and therefore there must be a limit to the number of participants for each denomination of smart contract. If the number of people exceeds the contract limit, it might result in shortages/queues. This gives the malicious entities an opportunity to launch DDoS attack. One of the possible solutions: multiple contracts + one "router" contract, through which all the TX must be initiated.
 
-### Random Numbers Generation (RNG)
+### Rolling the Dice
 
-How can we prove, that router contract is honest ("nothing up my sleeve"), and besides, may not be manipulated by miners or anyone else?
-After the contract is activated, everybody must sign the next block's hash with his public key, and then publish the signature. Those signatures, if valid, will be in turn concatenated or XORed, and the result hashed, thus producing the seed for RNG.
-
-BTW, this algorithm might be also used in gambling dapps. They might even call it "rolling the dice" for marketing purposes, as it gives the participants the same illusion as physically rolling the dice -- illusion of some kind of personal control over the RNG.
+How can we prove, that router contract is honest ("nothing up my sleeve"), and besides, may not be manipulated by miners or anyone else? After the contract is activated, everybody must sign the next block's hash with his public key, and then publish the signature. Those signatures, if valid, will be in turn concatenated or XORed, and the result hashed, thus producing the seed for random numbers generation.
 
 ### Onion Concept
 
