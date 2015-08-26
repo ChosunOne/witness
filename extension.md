@@ -2,11 +2,7 @@
 
 ### Economics of Cross-Witness
 
-If any participant cheats, his money at stake must be enough to cover for all the expenses. The contract denomination must be greater than aggregated transaction costs of all the participants, plus potential arbitration costs. The aggregated costs are proportionate to the number of participants, and therefore there must be a limit to the number of participants for each denomination of smart contract. If the number of people exceeds the contract limit, it might result in shortages/queues. This gives the malicious entities an opportunity to launch DDoS attack. One of the possible solutions: multiple contracts + one "router" contract, through which all the TX must be initiated.
-
-### Rolling the Dice
-
-How can we prove, that router contract is honest ("nothing up my sleeve"), and besides, may not be manipulated by miners or anyone else? After the contract is activated, everybody must sign the next block's hash with his public key, and then publish the signature. Those signatures, if valid, will be in turn concatenated or XORed, and the result hashed, thus producing the seed for random numbers generation.
+If any participant cheats, his money at stake must be enough to cover for all the expenses. The contract denomination must be greater than aggregated transaction costs of all the participants, plus potential arbitration costs. The aggregated costs are proportionate to the number of participants, and therefore there must be a limit to the number of participants for each denomination of smart contract. If the number of people exceeds the contract limit, it might result in shortages/queues. This gives the malicious entities an opportunity to launch DDoS attack. One of the possible solutions: multiple contracts + one "router" contract, through which all the TX must be initiated. RANDAO algorithm should be used to assure, that router contract is fair ("nothing up my sleeve"), and besides, may not be manipulated by miners or anyone else.
 
 ### Onion Concept
 
