@@ -19,3 +19,27 @@ If the original version of Cross-Witness algorithm runs smoothly, it requires th
 - signing and dissolution
 
 Now, if we add one extra iteration (in case of two-layer onion), we only add one more TX -- publication of decrypted onion layer. If we add 4 iterations (five-layer onion), the TX costs will only double, but probability of failure will be p^5. However, arbitration costs increase dramatically. So, the economic calculations should be corrected correspondingly. It might also mean, that onion extension will be economically viable only for large denomination contracts.
+
+## Perfect Anonymity
+
+Creating anonymous account with sufficiant probability of privacy is an onerous task. But once it is created, it could be further used for an easy one-step anonymization of multiple accounts. Those accounts will then enjoy the perfect anonymity.
+
+The Witness Selection step of the original Cross-Witness algorithm is the weakest link -- one must rely on the chosen witness to protect his privacy. But if we use anonymous accounts for publishing encrypted destinations, the whole algorithm becomes trustless. Let's redesign the Cross-Witness algorithm.
+
+### Registration
+
+Each participant `p` has transferred some predetermined Ether value `stake` from their source accounts to the contract, attaching the chosen public key `public[p]`. In addition to that, he must attach the encrypted address of his anonymous account (for the possible Intermediate Arbitration).
+
+### Control Transfer
+
+Each participant generates a pair of keys to be associated with his anonymous account ("Controller" or `ctrl`). Then performes the Registration step again, this time using his `ctrl`. Another security deposit must be attached to this transaction. The number of transactions is not limited -- anyone who is willing to risk his deposit is allowed to participate. After this step is complete, each participant must sign the contract from his source account. If the number of Controllers is equal (or less) than the number of initial participants, and everyone has signed the contract, than the control over the contract execution has been successfully transferred to the anonymous Controller accounts, which will perform all the subsequent steps in lieu of source account. The second security deposit must be immediately returned to the Controllers.
+
+### Intermediate Arbitration
+
+If somebody has not signed, or the number of Controllers is greater than the number of sources, Intermediate Arbitration is triggered. Everybody must reveal his private key associated with his `src`, then the contract will automatically decrypt the designated `ctrl` addresses, and Controllers that were not pre-registered, lose their deposit. Non-signing without valid reason tantamounts to cheating.
+
+### Economics
+
+Intermediate Arbitration is a very expensive step, because it will compromise the privacy of each Controller address, and also of all the destination addresses created in the past with the same Controller. Therefore, second security deposit must be sufficiantly high to compensate for that. 
+
+Consider the following scenario: somebody fails to publish his encrypted `ctrl`, then complians and triggers the Intermediate Arbitration, in order to compromise the privacy of the participants. In order to compensate for the privacy loss, the Ether funds attached to the initial transaction must include two security deposits. One -- to compensate for the privacy loss in case of Intermediate Arbitration, second -- to cover the costs of the Final Arbitration. After successful completion of the Control Transfer, the first security deposit will be returned back to the corresponding `src` (same as with `ctrl` deposit). It could be then reused in the future.
