@@ -6,7 +6,7 @@ If any participant cheats, his money at stake must be enough to cover for all th
 
 ### Onion Concept
 
-We assume, that multiple iterations will be necessary to acheive the desired probability of untracebility. If we could do several iterations at once, we might save on transaction costs, execution time, and -- which might be even more important -- mental costs of initiating transaction, choosing the available contract in case of queues, and managing the multiple accounts (although this could be automated, but still requires external overhead).
+We assume, that multiple iterations will be necessary to achieve the desired probability of untracebility. If we could do several iterations at once, we might save on transaction costs, execution time, and -- which might be even more important -- mental costs of initiating transaction, choosing the available contract in case of queues, and managing the multiple accounts (although this could be automated, but still requires external overhead).
 
 Here is one of the possible solutions. During the Witness Selection step, everybody should select certain (predefined) number of witnesses, then repeatedly encrypt his data with their public keys, then publish the resulting encrypted data ("onion"). Next step remains the same, except that it must be repeated as many times, as required to "unwind the onion".
 
@@ -14,15 +14,15 @@ Here is one of the possible solutions. During the Witness Selection step, everyb
 
 If the original version of Cross-Witness algorithm runs smoothly, it requires the following transactions: 
 - initial money transfer with attached public key
-- publication of encrypted dest
-- publication of decrypted dest
+- publication of encrypted `dest`
+- publication of decrypted `dest`
 - signing and dissolution
 
 Now, if we add one extra iteration (in case of two-layer onion), we only add one more TX -- publication of decrypted onion layer. If we add 4 iterations (five-layer onion), the TX costs will only double, but probability of failure will be p^5. However, arbitration costs increase dramatically. So, the economic calculations should be corrected correspondingly. It might also mean, that onion extension will be economically viable only for large denomination contracts.
 
 ## Perfect Anonymity
 
-Creating anonymous account with sufficiant probability of privacy is an onerous task. But once it is created, it could be further used for an easy one-step anonymization of multiple accounts. Those accounts will then enjoy the perfect anonymity.
+Creating anonymous account with sufficient probability of privacy is an onerous task. But once it is created, it could be further used for an easy one-step anonymization of multiple accounts. Those accounts will then enjoy the perfect anonymity.
 
 The Witness Selection step of the original Cross-Witness algorithm is the weakest link -- one must rely on the chosen witness to protect his privacy. But if we use anonymous accounts for publishing encrypted destinations, the whole algorithm becomes trustless. Let's redesign the Cross-Witness algorithm.
 
@@ -32,7 +32,7 @@ Each participant `p` has transferred some predetermined Ether value `stake` from
 
 ### Control Transfer
 
-Each participant generates a pair of keys to be associated with his anonymous account ("Controller" or `ctrl`). Then performes the Registration step again, this time using his `ctrl`. Another security deposit must be attached to this transaction. The number of transactions is not limited -- anyone who is willing to risk his deposit is allowed to participate. After this step is complete, each participant must sign the contract from his source account. If the number of Controllers is equal (or less) than the number of initial participants, and everyone has signed the contract, than the control over the contract execution has been successfully transferred to the anonymous Controller accounts, which will perform all the subsequent steps in lieu of source account. The second security deposit must be immediately returned to the Controllers.
+Each participant generates a pair of keys to be associated with his anonymous account ("Controller" or `ctrl`). Then performs the Registration step again, this time using his `ctrl`. Another security deposit must be attached to this transaction. The number of transactions is not limited -- anyone who is willing to risk his deposit is allowed to participate. After this step is complete, each participant must sign the contract from his source account. If the number of Controllers is equal (or less) than the number of initial participants, and everyone has signed the contract, than the control over the contract execution has been successfully transferred to the anonymous Controller accounts, which will perform all the subsequent steps in lieu of source account. The second security deposit must be immediately returned to the Controllers.
 
 ### Intermediate Arbitration
 
@@ -40,12 +40,12 @@ If somebody has not signed, or the number of Controllers is greater than the num
 
 ### Economics
 
-Intermediate Arbitration is a very expensive step, because it will compromise the privacy of each Controller address, and also of all the destination addresses created in the past with the same Controller. Therefore, second security deposit must be sufficiantly high to compensate for that. 
+Intermediate Arbitration is a very expensive step, because it will compromise the privacy of each Controller address, and also of all the destination addresses created in the past with the same Controller. Therefore, second security deposit must be sufficiently high to compensate for that. 
 
-Consider the following scenario: somebody fails to publish his encrypted `ctrl`, then complians and triggers the Intermediate Arbitration, in order to compromise the privacy of the participants. In order to compensate for the privacy loss, the Ether funds attached to the initial transaction must include two security deposits. One -- to compensate for the privacy loss in case of Intermediate Arbitration, second -- to cover the costs of the Final Arbitration. After successful completion of the Control Transfer, the first security deposit will be returned back to the corresponding `src` (same as with `ctrl` deposit). It could be then reused in the future.
+Consider the following scenario: somebody fails to publish his encrypted `ctrl`, then complains and triggers the Intermediate Arbitration, in order to compromise the privacy of the participants. In order to compensate for the privacy loss, the Ether funds attached to the initial transaction must include two security deposits. One -- to compensate for the privacy loss in case of Intermediate Arbitration, second -- to cover the costs of the Final Arbitration. After successful completion of the Control Transfer, the first security deposit will be returned back to the corresponding `src` (same as with `ctrl` deposit). It could be then reused in the future.
 
 ### Usage
 
-Once Control Transfer has been done, and security deposits had been returned, it is possible to tranfer unlimited amount of Ether from `dest` to `ctrl`, without even bothering with `dest`. It could be done in several cycles, or one go. What's important -- now the tranfer becomes trusless and riskless. Why using the `dest` at all? Well, once sufficiant funds have been transferred to `ctrl`, there might be a need to split one anonymous account into multiple unrelated accounts (to be used further for multiple voting sessions). It is trivial to change this algorithm, so that one `src` and one `ctrl` will produce multiple `dest` accounts in one cycle. The resulting anonymous accounts might be in turn pumped with funds, then split again, and so on ad infinitum. 
+Once Control Transfer has been done, and security deposits had been returned, it is possible to transfer unlimited amount of Ether from `dest` to `ctrl`, without even bothering with `dest`. It could be done in several cycles, or in one go. What's important -- now the transfer becomes trustless and riskless. Why using the `dest` at all? Well, once sufficient funds have been transferred to `ctrl`, there might be a need to split one anonymous account into multiple unrelated accounts (to be used further for multiple voting sessions). It is trivial to change this algorithm, so that one `src` and one `ctrl` will produce multiple `dest` accounts in one cycle. The resulting anonymous accounts might be in turn pumped with funds, then split again, and so on ad infinitum. 
 
 To insure privacy, `ctrl` must be destroyed before the first usage of `dest`, and definitely after every single Arbitration. If everyone will follow this tactics, no malicious entity will ever try to trigger Arbitration, because it will reveal no information whatsoever, while being very expensive.
