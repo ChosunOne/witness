@@ -28,7 +28,7 @@ The Witness Selection step of the original Cross-Witness algorithm is the weakes
 
 ### Registration
 
-Each participant `p` has transferred some predetermined Ether value `stake` from their source accounts to the contract, attaching the chosen public key `public[p]`. In addition to that, he must attach the encrypted address of his anonymous account (for the possible Intermediate Arbitration).
+Each participant `p` has transferred some predetermined Ether value `stake` from their source accounts to the contract, attaching the chosen public key `public[p]` and encrypted address of his anonymous account (`ctrl`) for the possible Intermediate Arbitration.
 
 ### Control Transfer
 
