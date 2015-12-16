@@ -24,7 +24,7 @@ Now, if we add one extra iteration (in case of two-layer onion), we only add one
 
 If `dest` already contains some Ether, then we don't need the witnesses at all.
 
-1. Each participant `p` has transfers some predetermined Ether value (`stake`) from their source accounts to the contract, attaching the chosen public key `public[p]` and encrypted address of his anonymous account (`dest`) for the possible Intermediate Arbitration. 
+1. Each participant `p` transfers some predetermined Ether value (`stake`) from their source accounts to the contract, attaching the chosen public key `public[p]` and encrypted address of his anonymous account (`dest`) for the possible Intermediate Arbitration. 
 
 2. Every `dest` account registers itself, transferring security deposit to the contract. The number of transactions in this step is not limited -- anyone who is willing to risk his deposit is allowed to participate. After this step is complete, each participant `p` must sign the contract from his source account.
 
@@ -40,7 +40,7 @@ The Witness Selection step of the original Cross-Witness algorithm is the weakes
 
 ### Registration
 
-Each participant `p` has transferred some predetermined Ether value `stake` from their source accounts to the contract, attaching the chosen public key `public[p]` and encrypted address of his anonymous account (`ctrl`) for the possible Intermediate Arbitration.
+Each participant `p` transfers some predetermined Ether value `stake` from their source accounts to the contract, attaching the chosen public key `public[p]` and encrypted address of his anonymous account (`ctrl`) for the possible Intermediate Arbitration.
 
 ### Control Transfer
 
