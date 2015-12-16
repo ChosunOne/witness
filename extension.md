@@ -22,7 +22,7 @@ Now, if we add one extra iteration (in case of two-layer onion), we only add one
 
 ## Without Witnesses
 
-If `dest` already contains some Ether, then we don't need the witnesses at all.
+If `dest` already contains some Ether, then we don't need the witnesses at all. The algorithm becomes extremely simple:
 
 1. Each participant `p` transfers some predetermined Ether value (`stake`) from their source accounts (`src`) to the contract, attaching the chosen public key `public[p]` and encrypted address of his anonymous account (`dest`) for the possible Intermediate Arbitration. 
 
