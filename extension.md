@@ -20,6 +20,14 @@ If the original version of Cross-Witness algorithm runs smoothly, it requires th
 
 Now, if we add one extra iteration (in case of two-layer onion), we only add one more TX -- publication of decrypted onion layer. If we add 4 iterations (five-layer onion), the TX costs will only double, but probability of failure will be p^5. However, arbitration costs increase dramatically. So, the economic calculations should be corrected correspondingly. It might also mean, that onion extension will be economically viable only for large denomination contracts.
 
+## Without Witnesses
+
+If `dest` already contains some Ether, then we don't need the witnesses at all.
+1. Each participant `p` has transfers some predetermined Ether value (`stake`) from their source accounts to the contract, attaching the chosen public key `public[p]` and encrypted address of his anonymous account (`dest`) for the possible Intermediate Arbitration. 
+2. Every `dest` account registers itself, transferring security deposit to the contract. The number of transactions in this step is not limited -- anyone who is willing to risk his deposit is allowed to participate. After this step is complete, each participant `p` must sign the contract from his source account.
+3. If the number of `dest` accounts is equal (or less) than the number of initial participants, and everyone has signed the contract, than `stake` will transferred to the `dest` accounts.
+4. If somebody has not signed, or the number of Controllers is greater than the number of sources, Intermediate Arbitration is triggered. Everybody must reveal his private key associated with his `src`, then the contract will automatically decrypt the designated `ctrl` addresses, and Controllers that were not pre-registered, lose their deposit. Non-signing without valid reason tantamounts to cheating.
+
 ## Perfect Anonymity
 
 Creating anonymous account with sufficient probability of privacy is an onerous task. But once it is created, it could be further used for an easy one-step anonymization of multiple accounts. Those accounts will then enjoy the perfect anonymity.
