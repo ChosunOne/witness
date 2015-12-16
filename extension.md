@@ -23,9 +23,13 @@ Now, if we add one extra iteration (in case of two-layer onion), we only add one
 ## Without Witnesses
 
 If `dest` already contains some Ether, then we don't need the witnesses at all.
+
 1. Each participant `p` has transfers some predetermined Ether value (`stake`) from their source accounts to the contract, attaching the chosen public key `public[p]` and encrypted address of his anonymous account (`dest`) for the possible Intermediate Arbitration. 
+
 2. Every `dest` account registers itself, transferring security deposit to the contract. The number of transactions in this step is not limited -- anyone who is willing to risk his deposit is allowed to participate. After this step is complete, each participant `p` must sign the contract from his source account.
+
 3. If the number of `dest` accounts is equal (or less) than the number of initial participants, and everyone has signed the contract, than `stake` will transferred to the `dest` accounts.
+
 4. If somebody has not signed, or the number of Controllers is greater than the number of sources, Intermediate Arbitration is triggered. Everybody must reveal his private key associated with his `src`, then the contract will automatically decrypt the designated `ctrl` addresses, and Controllers that were not pre-registered, lose their deposit. Non-signing without valid reason tantamounts to cheating.
 
 ## Perfect Anonymity
